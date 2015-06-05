@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.diary.dao.DiaryMapper" >
+  <resultMap id="BaseResultMap" type="com.diary.domain.Diary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="toUserName" property="toUserName" jdbcType="VARCHAR" />
+    <result column="fromUserName" property="fromUserName" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="msgType" property="msgType" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="msgId" property="msgId" jdbcType="BIGINT" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="mediaId" property="mediaId" jdbcType="VARCHAR" />
+    <result column="picUrl" property="picUrl" jdbcType="VARCHAR" />
+    <result column="msgGroupId" property="msgGroupId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, toUserName, fromUserName, createTime, msgType, content, msgId, updateTime, mediaId, 
+    picUrl, msgGroupId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from diary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectyByGroupId" resultType="com.diary.domain.Diary" parameterType="java.lang.Integer" >
+	  select
+	  <include refid="Base_Column_List" />
+	  from diary
+	  where msgGroupId = #{groupId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from diary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.diary.domain.Diary" >
+    insert into diary (id, toUserName, fromUserName, 
+      createTime, msgType, content, 
+      msgId, updateTime, mediaId, 
+      picUrl, msgGroupId)
+    values (#{id,jdbcType=INTEGER}, #{toUserName,jdbcType=VARCHAR}, #{fromUserName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{msgType,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{msgId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{mediaId,jdbcType=VARCHAR}, 
+      #{picUrl,jdbcType=VARCHAR}, #{msgGroupId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.diary.domain.Diary" >
+    insert into diary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="toUserName != null" >
+        toUserName,
+      </if>
+      <if test="fromUserName != null" >
+        fromUserName,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="msgType != null" >
+        msgType,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="msgId != null" >
+        msgId,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+      <if test="mediaId != null" >
+        mediaId,
+      </if>
+      <if test="picUrl != null" >
+        picUrl,
+      </if>
+      <if test="msgGroupId != null" >
+        msgGroupId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="toUserName != null" >
+        #{toUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUserName != null" >
+        #{fromUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null" >
+        #{msgId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mediaId != null" >
+        #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="msgGroupId != null" >
+        #{msgGroupId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.diary.domain.Diary" >
+    update diary
+    <set >
+      <if test="toUserName != null" >
+        toUserName = #{toUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUserName != null" >
+        fromUserName = #{fromUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgType != null" >
+        msgType = #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null" >
+        msgId = #{msgId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mediaId != null" >
+        mediaId = #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="msgGroupId != null" >
+        msgGroupId = #{msgGroupId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.diary.domain.Diary" >
+    update diary
+    set toUserName = #{toUserName,jdbcType=VARCHAR},
+      fromUserName = #{fromUserName,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      msgType = #{msgType,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      msgId = #{msgId,jdbcType=BIGINT},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      mediaId = #{mediaId,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      msgGroupId = #{msgGroupId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

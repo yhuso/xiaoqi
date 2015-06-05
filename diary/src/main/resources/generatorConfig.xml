@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 引入配置文件 -->
+	<!-- <properties resource="./init.properties" /> -->
+
+	<!-- 指定数据连接驱动jar地址 -->
+	<classPathEntry location="C:/Users/Administrator/.m2/repository/mysql/mysql-connector-java/5.1.9/mysql-connector-java-5.1.9.jar" />
+
+	<!-- 一个数据库一个context -->
+	<context id="read">
+
+		<commentGenerator>
+		 <!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true" />
+			<!-- 是否生成注释代时间戳 -->
+			<property name="suppressDate" value="false" /> 
+		</commentGenerator>
+
+<!-- 		jdbc连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+			connectionURL="jdbc:mysql://127.0.0.1:3306/xiaoqi" 
+			userId="root" password="bianjie" />
+
+<!-- 		类型转换 -->
+		<javaTypeResolver>
+<!-- 			是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+<!-- 		实体类 -->
+		<javaModelGenerator targetProject="src/main/java" targetPackage="com.diary.domain">
+			<property name="enableSubPackages" value="false" />
+<!-- 			是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="false" />
+		</javaModelGenerator>
+
+<!-- 		mapxml -->
+		<sqlMapGenerator targetProject="src/main/resources" targetPackage="com/diary/mybatis/mapper">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		
+<!-- 		dao -->
+		<javaClientGenerator targetProject="src/main/java" targetPackage="com.diary.dao" type="XMLMAPPER">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<table schema="xiaoqi" tableName="diary" domainObjectName="Diary"
+			enableInsert="true"
+			enableDeleteByPrimaryKey="true"
+			enableUpdateByPrimaryKey="true"
+			enableSelectByPrimaryKey="true"
+			enableCountByExample="false" 
+			enableDeleteByExample="false"
+			enableSelectByExample="false" 
+			enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+		
+		<table schema="xiaoqi" tableName="msggroup" domainObjectName="MsgGroup"
+			enableInsert="true"
+			enableDeleteByPrimaryKey="true"
+			enableUpdateByPrimaryKey="true"
+			enableSelectByPrimaryKey="true"
+			enableCountByExample="false" 
+			enableDeleteByExample="false"
+			enableSelectByExample="false" 
+			enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+	</context>
+	
+	
+</generatorConfiguration>
