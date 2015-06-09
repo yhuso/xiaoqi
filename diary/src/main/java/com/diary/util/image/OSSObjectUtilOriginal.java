@@ -6,10 +6,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.ObjectMetadata;
 
@@ -18,12 +18,14 @@ import com.aliyun.oss.model.ObjectMetadata;
  */
 @Component
 public class OSSObjectUtilOriginal extends OSSObjectUtilBase {
-	protected String accessKeyID = global.getACCESSKEYID_ORIGINAL();
-	protected String accessKeySecret = global.getACCESSKEYSECRET_ORIGINAL();
-	protected String bucketName = global.getBUCKETNAME_ORIGINAL();
+	
+	@Autowired
+	public OSSObjectUtilOriginal(Global global){
+		this.bucketName = global.getBUCKETNAME_ORIGINAL();
+	}
 
 	@Override
-	protected void uploadFile(OSSClient client, String bucketName, String key, String filename) throws OSSException, ClientException, IOException {
+	protected void uploadFileSon(String key, String filename) throws OSSException, ClientException, IOException {
         File file = new File(filename);
 
         ObjectMetadata objectMeta = new ObjectMetadata();
@@ -39,7 +41,7 @@ public class OSSObjectUtilOriginal extends OSSObjectUtilBase {
 	}
 	
 	@Override
-	public void uploadFile_stream(OSSClient client, String bucketName, String key, byte[] filebytes) throws OSSException, ClientException, IOException {
+	public void uploadFile_streamSon(String key, byte[] filebytes) throws OSSException, ClientException, IOException {
 
         ObjectMetadata objectMeta = new ObjectMetadata();
 		

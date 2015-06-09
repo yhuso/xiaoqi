@@ -3,22 +3,43 @@ package com.diary.util.image;
 import lombok.Data;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.aliyun.oss.OSSClient;
 
 @Data
-@ConfigurationProperties
+@Configuration
+@ConfigurationProperties(prefix="S_constants")
 public class Global {
 	/************************************** 阿里云 存储 ***********************************************/
 	// 原图
-	private final String ACCESSKEYID_ORIGINAL;
-	private final String ACCESSKEYSECRET_ORIGINAL;
-	private final String BUCKETNAME_ORIGINAL;
+	private String ACCESSKEYID_ORIGINAL;
+	private String ACCESSKEYSECRET_ORIGINAL;
+	private String BUCKETNAME_ORIGINAL;
 
 	// 水印
-	private final String ACCESSKEYID_WATER;
-	private final String ACCESSKEYSECRET_WATER;
-	private final String BUCKETNAME_WATER;
+	private String ACCESSKEYID_WATER;
+	private String ACCESSKEYSECRET_WATER;
+	private String BUCKETNAME_WATER;
 
-	private final int ALIYUN_ECS;
-	private final String ALIYUN_INTERNAL;
+	private int ALIYUN_ECS;
+	private String ALIYUN_INTERNAL;
 
+	/**
+	 * 配置文件读入以后，才执行此方法生成bean
+	 * @return
+	 */
+	@Bean
+	public OSSClient oSSClient(){
+		OSSClient client = null;
+		if (ALIYUN_ECS == 1) {
+			//client 阿里云内网
+			client = new OSSClient(ALIYUN_INTERNAL, ACCESSKEYID_ORIGINAL, ACCESSKEYSECRET_ORIGINAL);
+		} else {
+			//client 阿里云外网
+			client = new OSSClient("http://oss-cn-shenzhen.aliyuncs.com",ACCESSKEYID_ORIGINAL, ACCESSKEYSECRET_ORIGINAL);
+		}
+		return client;
+	}
 }
