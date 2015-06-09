@@ -15,7 +15,7 @@ public class TomcatPoolDataSourceProperties {
 	private int maxActive = 100;
 	private int maxIdle = 8;
 	private int minIdle = 8;
-	private int initialSize = 10;
+	private int initialSize = 1;//10->1
 	private String validationQuery;
 
 	
