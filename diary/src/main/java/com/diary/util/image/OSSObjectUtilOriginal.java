@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.aliyun.oss.ClientException;
+import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.ObjectMetadata;
 
@@ -19,9 +21,11 @@ import com.aliyun.oss.model.ObjectMetadata;
 @Component
 public class OSSObjectUtilOriginal extends OSSObjectUtilBase {
 	
-	@Autowired
-	public OSSObjectUtilOriginal(Global global){
-		this.bucketName = global.getBUCKETNAME_ORIGINAL();
+	protected OSSClient originalClient;
+	
+	@Autowired @Qualifier
+	public OSSObjectUtilOriginal(ImageConfig global,OSSClient client){
+		bucketName = global.getBUCKETNAME_ORIGINAL();
 	}
 
 	@Override

@@ -26,8 +26,8 @@ public abstract class OSSObjectUtilBase {
 	private static Logger logger = LoggerFactory.getLogger(OSSObjectUtilBase.class);
 	
 	@Autowired
-	protected Global global;
-	@Autowired
+	protected ImageConfig global;
+	
 	protected OSSClient client;
 	
 	public String bucketName;
