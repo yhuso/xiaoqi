@@ -31,7 +31,7 @@ public class ImageConfig {
 	 * 配置文件读入以后，才执行此方法生成bean
 	 * @return
 	 */
-	@Bean(name="originalClient")
+	@Bean(name="client")
 	public OSSClient originalClient(){
 		OSSClient client = null;
 		if (ALIYUN_ECS == 1) {
@@ -44,20 +44,20 @@ public class ImageConfig {
 		return client;
 	}
 	
-	/**
-	 * 配置文件读入以后，才执行此方法生成bean
-	 * @return
-	 */
-	@Bean(name="waterClient")
-	public OSSClient waterClient(){
-		OSSClient client = null;
-		if (ALIYUN_ECS == 1) {
-			//client 阿里云内网
-			client = new OSSClient(ALIYUN_INTERNAL, ACCESSKEYID_WATER, ACCESSKEYSECRET_WATER);
-		} else {
-			//client 阿里云外网
-			client = new OSSClient(ALIYUN_EXTERNAL,ACCESSKEYID_WATER, ACCESSKEYSECRET_WATER);
-		}
-		return client;
-	}
+//	/**
+//	 * 配置文件读入以后，才执行此方法生成bean
+//	 * @return
+//	 */
+//	@Bean(name="waterClient")
+//	public OSSClient waterClient(){
+//		OSSClient client = null;
+//		if (ALIYUN_ECS == 1) {
+//			//client 阿里云内网
+//			client = new OSSClient(ALIYUN_INTERNAL, ACCESSKEYID_WATER, ACCESSKEYSECRET_WATER);
+//		} else {
+//			//client 阿里云外网
+//			client = new OSSClient(ALIYUN_EXTERNAL,ACCESSKEYID_WATER, ACCESSKEYSECRET_WATER);
+//		}
+//		return client;
+//	}
 }

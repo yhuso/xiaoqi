@@ -1,4 +1,4 @@
-package com.diary.web;
+package com.diary.web.wechat;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,8 +75,6 @@ public class WeChatBaseController {
 	@RequestMapping(value="/",method=RequestMethod.POST,produces={"application/xml"})
 	@ResponseBody
 	public void doPost(@RequestBody WeChatReqBean reqBean,HttpServletResponse resp) throws IOException {
-		logger.info(BeanUtils.printAllProperties(reqBean));
-		
 		Date d = new Date(reqBean.getCreateTime());
 		logger.info(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d));
 		
@@ -95,7 +93,7 @@ public class WeChatBaseController {
 				m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 				m.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 				WeChatRespBean respBean = createRespBean(reqBean, content);
-				FileOutputStream fos = new FileOutputStream(new File("C:\\Users\\Administrator\\Desktop\\项目相关笔记\\respons_msg.txt"), true);
+//				FileOutputStream fos = new FileOutputStream(new File("C:\\Users\\Administrator\\Desktop\\项目相关笔记\\respons_msg.txt"), true);
 	//			m.marshal(respBean, fos);
 				m.marshal(respBean, out);
 			}
@@ -138,6 +136,7 @@ public class WeChatBaseController {
 		String msgType = reqBean.getMsgType();
 		if (Constants.MSGTYPE_TEXT.equals(msgType) || Constants.MSGTYPE_IMAGE.equals(msgType)) {
 			String reqContent = reqBean.getContent();
+			logger.info("接收到消息:{}",reqContent);
 			if("模式".equals(reqContent)){
 				String catalog = "1.写日记\n2.查看日记";
 				return catalog;

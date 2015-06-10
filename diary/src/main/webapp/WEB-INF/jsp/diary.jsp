@@ -32,17 +32,17 @@ String.prototype.html= function(encode) {
 pass_ticket = encodeURIComponent(pass_ticket.html(false).html(false).replace(/\s/g,"+"));
 </script> 
   <title>Beacon's&nbsp;Diary</title> 
-  <link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve262c35.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve262c35.css" /> -->
   <style>         </style>
   <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve_pc262c35.css"><![endif]-->
   <script type="text/javascript">
-    document.domain = "qq.com";
+    <!-- document.domain = "qq.com"; -->
 </script> 
  </head> 
  <body id="activity-detail" class="zh_CN mm_appmsg" ontouchstart=""> 
   <script type="text/javascript">
         var write_sceen_time = (+new Date());
-        (sampling) && ((new Image()).src = "http://isdspeed.qq.com/cgi-bin/r.cgi?flag1=7839&flag2=7&flag3=8&16=1000&r=" + Math.random());
+        <!--(sampling) && ((new Image()).src = "http://isdspeed.qq.com/cgi-bin/r.cgi?flag1=7839&flag2=7&flag3=8&16=1000&r=" + Math.random());-->
     </script> 
   
   <div id="js_article" class="rich_media"> 
@@ -74,12 +74,10 @@ pass_ticket = encodeURIComponent(pass_ticket.html(false).html(false).replace(/\s
        			<p class="text"> </p>
        		</c:if>
        		<c:if test="${diary.msgType== 'image'}">
-       		<!-- <img data-src=${diary.picUrl} data-s="300,640" data-ratio="0.995" data-w="200" /> -->
+       		<%-- <img data-src="http://xqpublicread.oss-cn-shenzhen.aliyuncs.com/${diary.mediaId}" data-s="300,640" data-ratio="0.995" data-w="200" /> --%>
        		<!-- <p style="text-align: center;"><img src="/image/get/${diary.mediaId}" /></p>  -->
-       			<p style="text-align: center;"><img src="http://xiaoqidiary.oss-cn-shenzhen.aliyuncs.com/psu.jpg?OSSAccessKeyId=Vztz5q7B01mKildE&Expires=1433529597&Signature=nsSRIFXsJOzIAJy5%2BVe1q7YFsBU%3D" /></p>
        			
-       			<p style="text-align: center;"><img src="http://xiaoqidiary.oss-cn-shenzhen.aliyuncs.com/Penguins.jpg?OSSAccessKeyId=Vztz5q7B01mKildE&Expires=1433530057&Signature=bXeDe6ZNYINT9Hiqz5ceme4mqgI%3D" /></p>
-       			<p style="text-align: center;"><img src="http://xiaoqidiary.oss-cn-shenzhen.aliyuncs.com/Tulips.jpg?OSSAccessKeyId=Vztz5q7B01mKildE&Expires=1433530007&Signature=ixe5t%2FFUJmlPkTZd9wkJWJCPayA%3D" /></p>
+       			<p style="text-align: center;"><img src="http://xqpublicread.oss-cn-shenzhen.aliyuncs.com/${diary.mediaId}" /></p> 
        			<p class="text"> </p>
        		</c:if>
        </c:forEach>
@@ -101,7 +99,7 @@ pass_ticket = encodeURIComponent(pass_ticket.html(false).html(false).replace(/\s
       <script type="text/javascript">
                         var first_sceen__time = (+new Date());
                     </script> 
-      <link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve_combo262c35.css" /> 
+      <!-- <link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve_combo262c35.css" /> --> 
       <div class="rich_media_tool" id="js_toobar"> 
        <div id="js_read_area" class="media_tool_meta tips_global meta_primary" style="display:none;">
         阅读 

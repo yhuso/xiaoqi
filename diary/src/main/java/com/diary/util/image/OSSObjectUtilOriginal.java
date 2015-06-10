@@ -23,9 +23,10 @@ public class OSSObjectUtilOriginal extends OSSObjectUtilBase {
 	
 	protected OSSClient originalClient;
 	
-	@Autowired @Qualifier
+	@Autowired//@Qualifier
 	public OSSObjectUtilOriginal(ImageConfig global,OSSClient client){
 		bucketName = global.getBUCKETNAME_ORIGINAL();
+		this.client = client;
 	}
 
 	@Override
