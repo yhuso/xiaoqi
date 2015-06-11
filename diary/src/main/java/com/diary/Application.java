@@ -14,6 +14,9 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext ctx = SpringApplication.run(new Object[] { Application.class }, args);
 //		Object testBean = ctx.getBean(OSSObjectUtilOriginal.class);
+//		if(testBean!=null){
+//			System.out.println("testBean'name="+testBean.getClass().getName());
+//		}
 //		OSSObjectUtilBase oss;
 //		if(testBean!=null){
 //			oss = (OSSObjectUtilBase)testBean;

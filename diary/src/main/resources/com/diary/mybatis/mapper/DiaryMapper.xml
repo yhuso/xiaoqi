@@ -32,6 +32,9 @@
 	  where msgGroupId = #{groupId,jdbcType=INTEGER}
   </select>
   
+   
+  
+  <!-- write start -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from diary
     where id = #{id,jdbcType=INTEGER}

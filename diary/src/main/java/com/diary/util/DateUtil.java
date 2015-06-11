@@ -1,5 +1,6 @@
 package com.diary.util;
 
+
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -7,178 +8,28 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 public class DateUtil {
-	// ~ Static fields/initializers
-	// =============================================
-
 	private static Logger logger = Logger.getLogger(DateUtil.class);
 	private static String defaultDatePattern = null;
 	private static String timePattern = "HH:mm";
-	private static Calendar cale = Calendar.getInstance();
 	public static final String TS_FORMAT = DateUtil.getDatePattern()
 			+ " HH:mm:ss.S";
-	/** 日期格式yyyy-MM字符串常量 */
-	private static final String MONTH_FORMAT = "yyyy-MM";
 	/** 日期格式yyyy-MM-dd字符串常量 */
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
-	/** 日期格式HH:mm:ss字符串常量 */
-	private static final String HOUR_FORMAT = "HH:mm:ss";
 	/** 日期格式yyyy-MM-dd HH:mm:ss字符串常量 */
 	private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	/** 某天开始时分秒字符串常量 00:00:00 */
-	private static final String DAY_BEGIN_STRING_HHMMSS = " 00:00:00";
 	/** 某天结束时分秒字符串常量 23:59:59 */
+	private static final String HOURMIN_FORMAT = "HH:mm";
 	public static final String DAY_END_STRING_HHMMSS = " 23:59:59";
 	public static final String YEARMONTHDAY = "yyyy/MM/dd";
 	public static final String MONTHDAY = "MM月dd日";
-	private static SimpleDateFormat sdf_date_format = new SimpleDateFormat(
-			DATE_FORMAT);
-	private static SimpleDateFormat sdf_hour_format = new SimpleDateFormat(
-			HOUR_FORMAT);
-	private static SimpleDateFormat sdf_datetime_format = new SimpleDateFormat(
-			DATETIME_FORMAT);
+	public static SimpleDateFormat sdf_date_format = new SimpleDateFormat(DATE_FORMAT);
+	public static SimpleDateFormat sdf_datetime_format = new SimpleDateFormat(DATETIME_FORMAT);
+	public static SimpleDateFormat sdf_hourmin_format = new SimpleDateFormat(HOURMIN_FORMAT);
 
-	// ~ Methods
-	// ================================================================
-
-	public DateUtil() {
-	}
-
-	/**
-	 * 获得服务器当前日期及时间，以格式为：yyyy-MM-dd HH:mm:ss的日期字符串形式返回
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getDateTime() {
-		try {
-			return sdf_datetime_format.format(cale.getTime());
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getDateTime():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 获得服务器当前日期，以格式为：yyyy-MM-dd的日期字符串形式返回
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getDate() {
-		try {
-			return sdf_date_format.format(cale.getTime());
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getDate():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 获得服务器当前时间，以格式为：HH:mm:ss的日期字符串形式返回
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getTime() {
-		String temp = " ";
-		try {
-			temp += sdf_hour_format.format(cale.getTime());
-			return temp;
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getTime():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 统计时开始日期的默认值
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getStartDate() {
-		try {
-			return getYear() + "-01-01";
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getStartDate():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 统计时结束日期的默认值
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getEndDate() {
-		try {
-			return getDate();
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getEndDate():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 获得服务器当前日期的年份
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getYear() {
-		try {
-			return String.valueOf(cale.get(Calendar.YEAR));
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getYear():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 获得服务器当前日期的月份
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getMonth() {
-		try {
-			java.text.DecimalFormat df = new java.text.DecimalFormat();
-			df.applyPattern("00;00");
-			return df.format((cale.get(Calendar.MONTH) + 1));
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getMonth():" + e.getMessage());
-			return "";
-		}
-	}
-
-	/**
-	 * 获得服务器在当前月中天数
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	public static String getDay() {
-		try {
-			return String.valueOf(cale.get(Calendar.DAY_OF_MONTH));
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.getDay():" + e.getMessage());
-			return "";
-		}
-	}
-
+	public static SimpleDateFormat zhYMD_format = new SimpleDateFormat("yyyy年MM月dd日");
 	/**
 	 * 比较两个日期相差的天数 date1-date2相差的天数
 	 * 
@@ -230,9 +81,8 @@ public class DateUtil {
 	 */
 	public static int daysBetween(Date smdate, Date bdate)
 			throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		smdate = sdf.parse(sdf.format(smdate));
-		bdate = sdf.parse(sdf.format(bdate));
+		smdate = sdf_date_format.parse(sdf_date_format.format(smdate));
+		bdate = sdf_date_format.parse(sdf_date_format.format(bdate));
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(smdate);
 		long time1 = cal.getTimeInMillis();
@@ -289,52 +139,6 @@ public class DateUtil {
 		} catch (Exception e) {
 			logger.debug("DateUtilV2.getMargin():" + e.toString());
 			return 0;
-		}
-	}
-
-	/**
-	 * 返回日期加X天后的日期
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @param date
-	 * @param i
-	 * @return
-	 */
-	public static String addDay(String date, int i) {
-		try {
-			GregorianCalendar gCal = new GregorianCalendar(
-					Integer.parseInt(date.substring(0, 4)),
-					Integer.parseInt(date.substring(5, 7)) - 1,
-					Integer.parseInt(date.substring(8, 10)));
-			gCal.add(GregorianCalendar.DATE, i);
-			return sdf_date_format.format(gCal.getTime());
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.addDay():" + e.toString());
-			return getDate();
-		}
-	}
-
-	/**
-	 * 返回日期加X月后的日期
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @param date
-	 * @param i
-	 * @return
-	 */
-	public static String addMonth(String date, int i) {
-		try {
-			GregorianCalendar gCal = new GregorianCalendar(
-					Integer.parseInt(date.substring(0, 4)),
-					Integer.parseInt(date.substring(5, 7)) - 1,
-					Integer.parseInt(date.substring(8, 10)));
-			gCal.add(GregorianCalendar.MONTH, i);
-			return sdf_date_format.format(gCal.getTime());
-		} catch (Exception e) {
-			logger.debug("DateUtilV2.addMonth():" + e.toString());
-			return getDate();
 		}
 	}
 
@@ -402,7 +206,6 @@ public class DateUtil {
 	 * @param Span
 	 * @return
 	 */
-	@SuppressWarnings("static-access")
 	public String rollDate(String orgDate, int Type, int Span) {
 		try {
 			String temp = "";
@@ -442,7 +245,7 @@ public class DateUtil {
 
 			Calendar orgcale = Calendar.getInstance();
 			orgcale.set(iyear, imonth, iday);
-			temp = this.rollDate(orgcale, Type, Span);
+			temp = rollDate(orgcale, Type, Span);
 			return temp;
 		} catch (Exception e) {
 			return "";
@@ -544,15 +347,18 @@ public class DateUtil {
 	}
 
 	/**
-	 * 将指定的日期转换成默认格式的字符串形式
-	 * 
+	 * 用指定的模式格式日期
+	 * 如果data=null,则返回""
 	 *
 	 * @date Mar 11, 2012
 	 * @param aDate
 	 * @return
 	 */
-	public static final String convertDateToString(Date aDate) {
-		return getDateTime(getDatePattern(), aDate);
+	public static final String convertDateToString(Date date,SimpleDateFormat pattern) {
+		if(date==null){
+			return "";
+		}
+		return pattern.format(date);
 	}
 
 	/**
@@ -627,43 +433,6 @@ public class DateUtil {
 	}
 
 	/**
-	 * 将指定字符串格式的日期与当前时间比较
-	 * 
-	 * @author DYLAN
-	 * @date Feb 17, 2012
-	 * @param strDate
-	 *            需要比较时间
-	 * @return <p>
-	 *         int code
-	 *         <ul>
-	 *         <li>-1 当前时间 < 比较时间</li>
-	 *         <li>0 当前时间 = 比较时间</li>
-	 *         <li>>=1当前时间 > 比较时间</li>
-	 *         </ul>
-	 *         </p>
-	 */
-	public static int compareToCurTime(String strDate) {
-		if (StringUtils.isBlank(strDate)) {
-			return -1;
-		}
-		Date curTime = cale.getTime();
-		String strCurTime = null;
-		try {
-			strCurTime = sdf_datetime_format.format(curTime);
-		} catch (Exception e) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("[Could not format '" + strDate
-						+ "' to a date, throwing exception:"
-						+ e.getLocalizedMessage() + "]");
-			}
-		}
-		if (StringUtils.isNotBlank(strCurTime)) {
-			return strCurTime.compareTo(strDate);
-		}
-		return -1;
-	}
-
-	/**
 	 * 返回指定年份中指定月份的天数
 	 * 
 	 * @param 年份year
@@ -694,22 +463,6 @@ public class DateUtil {
 		} else {
 			return false;
 		}
-	}
-
-	/**
-	 * 取得当前时间的日戳
-	 * 
-	 *
-	 * @date Mar 11, 2012
-	 * @return
-	 */
-	@SuppressWarnings("deprecation")
-	public static String getTimestamp() {
-		Date date = cale.getTime();
-		String timestamp = "" + (date.getYear() + 1900) + date.getMonth()
-				+ date.getDate() + date.getMinutes() + date.getSeconds()
-				+ date.getTime();
-		return timestamp;
 	}
 
 	/**
@@ -753,16 +506,30 @@ public class DateUtil {
 		return getDateTime(reg, target);
 	}
 	
-	public static void main(String[] args) {
-//		Date target = null;
-//		try {
-//			target = convertStringToDate("2015-3-26");
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(formatDateToFriendString(target,DateUtil.YEARMONTHDAY));
-		Date d = new Date(1433396578*1000L);
-		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d));
+	/** 
+     * 获取当前月的最后一天 
+     * @param date 
+     * @return 
+     * @throws ParseException 
+     */  
+    public static Date getMaxMonthDate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));  
+        return calendar.getTime();
+    }  
+
+    public static void main(String[] args) {
+    	Date smdate;
+    	Date tdate;
+		try {
+			smdate = new SimpleDateFormat("yyyy-MM-dd").parse("2015-06-01");
+			tdate = new SimpleDateFormat("yyyy-MM-dd").parse("2015-06-02");
+			System.out.println(daysBetween(null, tdate));
+		} catch (Exception e) {
+			logger.info("日期解析错误,");
+		}
+    	System.out.println("5");
+    
 	}
+	
 }

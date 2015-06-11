@@ -47,7 +47,7 @@
 
 <header id="mainheader">
 
-<h1>小琪的<span>日记本</span></h1>
+<h1>hello<span>yhuso</span></h1>
 </header>
 
 

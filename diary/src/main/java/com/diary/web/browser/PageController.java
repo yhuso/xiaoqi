@@ -1,15 +1,25 @@
 package com.diary.web.browser;
 
-import java.util.Map;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.diary.domain.response.Post;
+import com.diary.service.DiaryService;
 
 @Controller
 public class PageController {
-	@RequestMapping(value = "/index.action")
-	public String agentAnalysisIndex(Map<String, Object> model){
-		model.put("content", diaryService.queryTest());
-		return "index";
-	}
+	@Autowired
+	DiaryService diaryService;
+	
+	@RequestMapping("/index.action")
+    private String login(ModelMap map){
+		List<Post> posts = diaryService.queryAllPost();
+		map.put("posts", posts);
+		String targetJsp = "timelineindex";
+        return targetJsp;
+    }
 }

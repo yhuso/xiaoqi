@@ -2,7 +2,6 @@ package com.diary.web.wechat;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -37,8 +36,8 @@ import com.diary.domain.WeChatReqBean;
 import com.diary.domain.WeChatRespBean;
 import com.diary.domain.stateBean.Session;
 import com.diary.service.DiaryService;
-import com.diary.util.BeanUtils;
 import com.diary.util.Md5AndShaUtil;
+import com.diary.util.NetUtils;
 import com.diary.yahoo.geocode.Query;
 import com.diary.yahoo.weather.YahooWeather;
 import com.diary.yahoo.weather.yweather.Forecast;
@@ -52,13 +51,14 @@ public class WeChatBaseController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET,produces={"application/xml", "application/json"})
 	@ResponseBody
-	public String checkSignature(SignatureVerifyRequest request){
+	public String checkSignature(SignatureVerifyRequest request,HttpServletRequest servletRequest){
 		String signature = request.getSignature();
 		String timestamp = request.getTimestamp();
 		String nonce = request.getNonce();
-		logger.info(AppConstant.TOKEN+"|"+timestamp+"|"+nonce);
+		
+		logger.info("来访IP={},"+AppConstant.TOKEN+"|"+timestamp+"|"+nonce,NetUtils.getIpAddr(servletRequest));
 		String[] params = new String[]{AppConstant.TOKEN,timestamp,nonce};
-		if(params.length==0){
+		if(params.length==0 || timestamp==null || nonce==null){
 			return null;
 		}
 		Arrays.sort(params);//升序

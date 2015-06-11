@@ -21,6 +21,13 @@
     from msggroup
   </select>
   
+  <select id="getAllGroup" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select * from msggroup g
+  	order by g.id desc
+	limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+  
+  <!-- write end -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from msggroup
     where id = #{id,jdbcType=INTEGER}
