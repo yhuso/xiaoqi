@@ -1,12 +1,12 @@
 package com.diary.util.image;
 
-import lombok.Data;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.aliyun.oss.OSSClient;
+
+import lombok.Data;
 
 @Data
 @Configuration
@@ -17,6 +17,10 @@ public class ImageConfig {
 	private String ACCESSKEYID_ORIGINAL;
 	private String ACCESSKEYSECRET_ORIGINAL;
 	private String BUCKETNAME_ORIGINAL;
+
+	public String getBUCKETNAME_ORIGINAL() {
+		return BUCKETNAME_ORIGINAL;
+	}
 
 	// 水印
 	private String ACCESSKEYID_WATER;

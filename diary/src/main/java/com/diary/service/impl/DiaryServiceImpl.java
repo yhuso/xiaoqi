@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.diary.constantEnum.AppConstant;
 import com.diary.dao.DiaryMapper;
 import com.diary.dao.MsgGroupMapper;
 import com.diary.domain.Diary;
@@ -23,7 +22,6 @@ import com.diary.domain.stateBean.Session;
 import com.diary.service.DiaryService;
 import com.diary.task.DownloadImgFromWechat;
 import com.diary.util.DateUtil;
-import com.diary.util.WechatUtil;
 import com.diary.util.image.OSSObjectUtilOriginal;
 
 

@@ -20,6 +20,14 @@ public enum ErrorEnum {
 	@Setter @Getter
 	private int status;
 	
+	public int getStatus() {
+		return status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
 	@Setter @Getter
 	private String message;
 

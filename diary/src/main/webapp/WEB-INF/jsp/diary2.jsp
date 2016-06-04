@@ -74,7 +74,7 @@ pass_ticket = encodeURIComponent(pass_ticket.html(false).html(false).replace(/\s
        			<p class="text"> </p>
        		</c:if>
        		<c:if test="${diary.msgType==image}">
-       			<p style="text-align: center;"><img data-src=<% ${diary.picUrl} %> data-type="png" data-s="300,640" data-ratio="0.995" data-w="200" /></p>
+       			<p style="text-align: center;"><img data-src="${diary.picUrl}" data-type="png" data-s="300,640" data-ratio="0.995" data-w="200" /></p>
        			<p class="text"> </p>
        		</c:if>
        </c:forEach>
